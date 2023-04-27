@@ -22,10 +22,6 @@ var transactionSchema = new Schema(
       type: mongoose.Schema.Types.Number,
       default: 0,
     },
-    interestRate: {
-      type: mongoose.Schema.Types.Number,
-      default: 0,
-    },
     timestamp: {
       type: mongoose.Schema.Types.Number,
       default: 0,
@@ -46,3 +42,6 @@ const Transaction = mongoose.model("Transaction", transactionSchema);
 // }
 
 module.exports = { Transaction };
+
+//17.5146
+//78.5858

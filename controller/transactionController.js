@@ -23,9 +23,7 @@ exports.addTransactionDetails = async (req, res, next) => {
       "sent" +
       reqBody.recipient +
       +reqBody.quantity +
-      "rupeeCOIN at" +
-      reqBody.interestRate +
-      "on" +
+      "rupeeCOIN on" +
       reqBody.timestamp +
       "with txnId" +
       reqBody.txnId
