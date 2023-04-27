@@ -1,4 +1,3 @@
-const allBooks = require("../routes/bookRoutes");
 const loginDetails = require("../routes/loginRoutes");
 const transactions = require("../routes/transactionRoutes");
 const blocks = require("../routes/blockRoutes");
@@ -13,7 +12,6 @@ router.get("/", (req, res) => {
   console.log("Hello World!!");
 });
 
-router.use("/books", allBooks);
 router.use("/login", loginDetails);
 router.use("/transaction", transactions);
 router.use("/blocks", blocks);

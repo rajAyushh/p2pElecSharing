@@ -11,9 +11,25 @@ var loginSchema = new Schema(
     privateKeyHash: {
       type: mongoose.Schema.Types.String,
     },
-    rupeeCoins: {
-        type:mongoose.Schema.Types.Number,
-        default:0,
+    wallet: {
+      type: mongoose.Schema.Types.Number,
+      default: 0,
+    },
+    latitude: {
+      type: mongoose.Schema.Types.Number,
+      default: 0,
+    },
+    longitude: {
+      type: mongoose.Schema.Types.Number,
+      default: 0,
+    },
+    currConsumption: {
+      type: mongoose.Schema.Types.Number,
+      default: 0,
+    },
+    currProduction: {
+      type: mongoose.Schema.Types.Number,
+      default: 0,
     }
   },
   { collection: "login" }
