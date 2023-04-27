@@ -18,23 +18,24 @@ function generateKeyPair() {
     .final()
     .toString("hex");
 
+  console.log("Generated key pair:", { publicKey, privateKey });
+
   return {
     publicKey: publicKey,
     privateKey: privateKey,
   };
 }
 
-var keyPair = generateKeyPair();
 
 var loginSchema = new Schema(
   {
     publicKey: {
       type: mongoose.Schema.Types.String,
-      default: keyPair.publicKey,
+      default: "",
     },
     privateKeyHash: {
       type: mongoose.Schema.Types.String,
-      default: keyPair.privateKey,
+      default: "",
     },
     wallet: {
       type: mongoose.Schema.Types.Number,
@@ -42,33 +43,40 @@ var loginSchema = new Schema(
     },
     latitude: {
       type: mongoose.Schema.Types.Number,
-      default: randomFloatBetween(16, 18),
+      default: function () {
+        return randomFloatBetween(16, 18);
+      },
     },
     longitude: {
       type: mongoose.Schema.Types.Number,
-      default: randomFloatBetween(76, 78),
+      default: function () {
+        return randomFloatBetween(76, 78);
+      },
     },
     currConsumption: {
       type: mongoose.Schema.Types.Number,
-      default: randomFloatBetween(10, 100),
+      default: function () {
+        return randomFloatBetween(10, 100);
+      },
     },
     currProduction: {
       type: mongoose.Schema.Types.Number,
-      default: randomFloatBetween(0, 20),
+      default: function () {
+        return randomFloatBetween(0, 20);
+      },
     },
   },
   { collection: "login" }
 );
 
-const Login = mongoose.model("Login", loginSchema);
+loginSchema.pre("save", function (next) {
+  console.log("Saving document with new key pair...");
+  const keyPair = generateKeyPair();
+  this.publicKey = keyPair.publicKey;
+  this.privateKeyHash = keyPair.privateKey;
+  next();
+});
 
-// function validateBook(Login) {
-//   const schema = Joi.object({
-//     author: Joi.string(),
-//     name: Joi.name(),
-//     bookId: Joi.any(),
-//   }).options({ abortEarly: false });
-//   return schema.validate(Login);
-// }
+const Login = mongoose.model("Login", loginSchema);
 
 module.exports = { Login };
