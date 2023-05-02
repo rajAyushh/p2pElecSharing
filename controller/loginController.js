@@ -1,4 +1,18 @@
 const { Login } = require("../models/loginModel");
+  const readline = require("readline");
+
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  function askQuestion(prompt) {
+    return new Promise((resolve, reject) => {
+      rl.question(prompt, (input) => {
+        resolve(input);
+      });
+    });
+  }
 
 exports.viewAllLoginDetails = async (req, res, next) => {
   result = await Login.find();
@@ -15,20 +29,6 @@ exports.addLoginDetails = async (req, res, next) => {
   });
 };
 exports.addLoginDetailsUsingTerm = async (req, res, next) => {
-  const readline = require("readline");
-
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  function askQuestion(prompt) {
-    return new Promise((resolve, reject) => {
-      rl.question(prompt, (input) => {
-        resolve(input);
-      });
-    });
-  }
   const longitude = await askQuestion("Enter the longitude: ");
   const latitude = await askQuestion("Enter the latitude: ");
   const currConsumption = await askQuestion("Enter the current consumption: ");
