@@ -26,7 +26,7 @@ function generateKeyPair() {
   };
 }
 
-
+// initialize schema for login to make this see if not default initialize values if add request json file contains that field
 var loginSchema = new Schema(
   {
     publicKey: {
@@ -43,27 +43,19 @@ var loginSchema = new Schema(
     },
     latitude: {
       type: mongoose.Schema.Types.Number,
-      default: function () {
-        return randomFloatBetween(16, 18);
-      },
+      default: randomFloatBetween(16, 18),
     },
     longitude: {
       type: mongoose.Schema.Types.Number,
-      default: function () {
-        return randomFloatBetween(76, 78);
-      },
+      default: randomFloatBetween(76, 78),
     },
     currConsumption: {
       type: mongoose.Schema.Types.Number,
-      default: function () {
-        return randomFloatBetween(10, 100);
-      },
+      default: randomFloatBetween(10, 100),
     },
     currProduction: {
       type: mongoose.Schema.Types.Number,
-      default: function () {
-        return randomFloatBetween(0, 20);
-      },
+      default: randomFloatBetween(0, 20),
     },
   },
   { collection: "login" }
