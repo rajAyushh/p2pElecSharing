@@ -18,6 +18,7 @@
     "logger": "^0.0.1",
     "mongodb": "^5.1.0",
     "mongoose": "^7.0.0",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "readline-sync": "^1.4.10"
   }
 }

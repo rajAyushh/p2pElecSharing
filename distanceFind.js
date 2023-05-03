@@ -1,3 +1,5 @@
+const readline = require("readline-sync");
+
 function degToRad(degrees) {
   return degrees * (Math.PI / 180);
 }
@@ -53,14 +55,40 @@ function allPairsShortestPath(locations) {
   return distances;
 }
 
-const locations = [
-  [51.5074, -0.1278], // London
-  [48.8566, 2.3522], // Paris
-  [40.7128, -74.006], // New York
-  [-33.8688, 151.2093], // Sydney
-  [35.6895, 139.6917], // Tokyo
-];
+function getInput() {
+  const n = Number(readline.question("Enter the number of people: "));
+  if (isNaN(n) || n <= 0) {
+    console.log("Invalid input: please enter a positive number");
+    return null;
+  }
 
-const distances = allPairsShortestPath(locations);
+  const locations = [];
 
-console.log(distances);
+  for (let i = 0; i < n; i++) {
+    const latStr = readline.question(`Enter the latitude of person ${i + 1}: `);
+    const lat = Number(latStr);
+    if (isNaN(lat) || lat < -90 || lat > 90) {
+      console.log("Invalid input: please enter a number between -90 and 90");
+      return null;
+    }
+
+    const lonStr = readline.question(
+      `Enter the longitude of person ${i + 1}: `
+    );
+    const lon = Number(lonStr);
+    if (isNaN(lon) || lon < -180 || lon > 180) {
+      console.log("Invalid input: please enter a number between -180 and 180");
+      return null;
+    }
+
+    locations.push([lat, lon]);
+  }
+
+  return locations;
+}
+
+const locations = getInput();
+if (locations !== null) {
+  const distances = allPairsShortestPath(locations);
+  console.log(distances);
+}

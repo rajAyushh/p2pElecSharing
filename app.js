@@ -1,4 +1,4 @@
-const port = 8080;
+const port = 8082;
 
 const express = require("express");
 const cors = require("cors");
@@ -50,16 +50,14 @@ setTimeout(() => {
           case "1":
             console.log("Create new User");
             //wait till the function completes execution
-            readline.pause();
             await loginController.addLoginDetailsUsingTerm();
-            readline.resume();
             continue;
           case "2":
             console.log("Mine Block");
             continue;
           case "3":
             console.log("Report deficit");
-            
+            await loginController.updateDeficitLoginDetails();
             continue;
           case "4":
             console.log("Update Current Production");
